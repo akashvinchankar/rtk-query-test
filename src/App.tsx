@@ -10,7 +10,9 @@ function App() {
   const [page, setPage] = React.useState(1);
   const { data, error, isLoading, isFetching, isSuccess } = useContactsQuery(
     page,
-    {}
+    {
+      pollingInterval: 1000 * 60,
+    }
   );
   console.log('Loading: ' + isLoading, 'Fetching: ' + isFetching);
 

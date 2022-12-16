@@ -36,7 +36,7 @@ export const contactsApi = createApi({
     }),
   }),
 
-  refetchOnMountOrArgChange: 6000,
+  refetchOnMountOrArgChange: 8000,
 });
 
 export const { useContactsQuery, useContactQuery, useAddContactMutation } =

@@ -7,8 +7,12 @@ import {
 } from './services/contactsApi';
 
 function App() {
-  const { data, error, isLoading, isFetching, isSuccess } = useContactsQuery();
-  console.log(isLoading, isFetching);
+  const [page, setPage] = React.useState(1);
+  const { data, error, isLoading, isFetching, isSuccess } = useContactsQuery(
+    page,
+    {}
+  );
+  console.log('Loading: ' + isLoading, 'Fetching: ' + isFetching);
 
   return (
     <div className="App">
@@ -18,7 +22,7 @@ function App() {
       {error && <h2>Something went wrong</h2>}
       {isSuccess && (
         <div>
-          {data?.map((contact) => {
+          {data?.map((contact: any) => {
             return (
               <div key={contact.id}>
                 <span>{contact.name}</span>
@@ -30,6 +34,12 @@ function App() {
           })}
         </div>
       )}
+      <button onClick={() => setPage((prev) => prev - 1)} disabled={page === 1}>
+        Back
+      </button>
+      <button onClick={() => setPage((prev) => prev + 1)} disabled={page === 4}>
+        Forward
+      </button>
       <div>
         <AddContact />
       </div>
@@ -39,7 +49,7 @@ function App() {
 
 export const ContactDetail = ({ id }: { id: string }) => {
   const { data } = useContactQuery(id, {
-    pollingInterval:3000,
+    pollingInterval: 1000 * 6,
     refetchOnMountOrArgChange: true,
     skip: false,
   });

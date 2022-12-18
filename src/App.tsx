@@ -11,7 +11,7 @@ function App() {
   const { data, error, isLoading, isFetching, isSuccess } = useContactsQuery(
     page,
     {
-      pollingInterval: 1000 * 60,
+      pollingInterval: 1000 * 60, 
     }
   );
   console.log('Loading: ' + isLoading, 'Fetching: ' + isFetching);
